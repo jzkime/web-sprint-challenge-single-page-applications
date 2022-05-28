@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function Form(props) {
-    const { values, change, submit } = props
+    const { values, change, submit, errors, disabled } = props
 
     const changeHandler = (evt) => {
         const { name, checkbox, value, type } = evt.target
@@ -19,15 +19,17 @@ export default function Form(props) {
             <label>Your name&nbsp;
                 <input type='text' id='name-input' name='name' onChange={changeHandler} value={values.name} placeholder='Pepper Pots' />
             </label>
+                <h5>{errors.name}</h5>
 
-            <label>Pick size
-                <select id='size-dropdown' name='size' onChange={changeHandler} value={values.size} >
-                    <option>small</option>
-                    <option>medium</option>
-                    <option>large</option>
-                    <option>super</option>
-                </select> 
-            </label> 
+            <select id='size-dropdown' name='size' onChange={changeHandler} value={values.size} >
+                <option>Pick your size</option>
+                <option name='small'>small</option>
+                <option name='medium'>medium</option>
+                <option name='large'>large</option>
+                <option name='super'>super</option>
+            </select> 
+            <h5>{errors.size}</h5>
+
 
         <label>Toppings
             <section id='toppings'>
@@ -53,7 +55,7 @@ export default function Form(props) {
             <label htmlFor='special-text'>Special Instructions</label>
                 <input name='special' id='special-text' onChange={changeHandler} value={values.special} />
 
-            <input type='submit' id='order-button' value='check out'/>
+            <input type='submit' id='order-button' value='check out' disabled={disabled}/>
         </form>
     )
 }

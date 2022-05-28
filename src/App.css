@@ -50,6 +50,10 @@ body {
   margin: -160px 0 -50px 0;
 }
 
+h5 {
+  margin: 1%;
+}
+
 #pizza-form {
   display: flex;
   flex-direction: column;
@@ -60,6 +64,10 @@ body {
   text-align: start;
   width: 80%;
   margin: 0 auto;
+}
+
+#size-dropdown {
+  width: 25%; 
 }
 
 #toppings {
