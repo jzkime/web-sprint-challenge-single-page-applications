@@ -3,19 +3,42 @@ import './App.css'
 import { Link, Route } from 'react-router-dom'
 import Form from './Form'
 import HomePage from './HomePage'
+import * as yup from 'yup'
+import schema from './formSchema'
 
 const initialValues = {
   name: "",
   size: "",
-  topping1: false,
-  topping2: false,
-  topping3: false,
-  topping4: false,
+  pepperoni: false,
+  veggie: false,
+  meat: false,
+  pineapple: false,
   special: "",
 }
 
 const App = () => {
+  const [ orders, setOrders ] = useState([])
   const [ orderValues, setOrderValues ] = useState(initialValues)
+
+  const changeForm = (name, value) => {
+    setOrderValues({...orderValues, [name]: value})
+  }
+
+  const submitForm = () => {
+    const newOrder = {
+      name: orderValues.name,
+      size: orderValues.size,
+      topping1: orderValues.pepperoni === 'on' ? true : false,
+      topping2: orderValues.veggie === 'on' ? true : false,
+      topping3: orderValues.meat === 'on' ? true : false,
+      topping4: orderValues.pineapple === 'on' ? true : false,
+      special: orderValues.special === 'on' ? true : false,
+    }
+
+    setOrders(...orders, newOrder )
+    console.log(newOrder)
+    setOrderValues(initialValues)
+  }
 
 
   return (
@@ -31,7 +54,7 @@ const App = () => {
       <HomePage />
     </Route>
       <Route path='/pizza'>
-        <Form />
+        <Form values={orderValues} change={changeForm} submit={submitForm} />
       </Route>
     </>
   );
