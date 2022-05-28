@@ -13,6 +13,7 @@ const initialValues = {
   veggie: false,
   meat: false,
   pineapple: false,
+  gf: false,
   special: "",
 }
 
@@ -42,11 +43,12 @@ const App = () => {
     const newOrder = {
       name: orderValues.name,
       size: orderValues.size,
-      topping1: orderValues.pepperoni === 'on' ? true : false,
-      topping2: orderValues.veggie === 'on' ? true : false,
-      topping3: orderValues.meat === 'on' ? true : false,
-      topping4: orderValues.pineapple === 'on' ? true : false,
-      special: orderValues.special === 'on' ? true : false,
+      topping1: orderValues.pepperoni,
+      topping2: orderValues.veggie,
+      topping3: orderValues.meat,
+      topping4: orderValues.pineapple,
+      special: orderValues.special,
+      gf: orderValues.gf,
     }
 
     setOrders(...orders, newOrder )

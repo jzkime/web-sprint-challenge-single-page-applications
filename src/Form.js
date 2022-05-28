@@ -4,8 +4,8 @@ export default function Form(props) {
     const { values, change, submit, errors, disabled } = props
 
     const changeHandler = (evt) => {
-        const { name, checkbox, value, type } = evt.target
-        const wantValue = type === checkbox ? checkbox : value;
+        const { name, checked, value, type } = evt.target
+        const wantValue = type === 'checkbox' ? checked : value;
         change(name, wantValue);
     }
 
@@ -50,6 +50,10 @@ export default function Form(props) {
                     &nbsp;Pineapple
                 </label>
             </section>
+        </label>
+
+        <label> GF&nbsp;
+            <input type='checkbox' name='gf' onChange={changeHandler} checked={values.gf} />
         </label>
 
             <label htmlFor='special-text'>Special Instructions</label>
