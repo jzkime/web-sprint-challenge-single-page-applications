@@ -21,7 +21,7 @@ export default function OrderCard(props) {
             <h3>{order.name}</h3>
             <p>Size: {order.size}</p>
             <div className='toppings'>
-                <h4>Toppings:</h4>
+                { !order.cheese && <h4>Toppings:</h4> }
                 { order.cheese && <p>Cheese</p> }
                 { order.pepperoni && <p>Pepperoni</p> }
                 { order.veggie && <p>Veggie Massacre</p> }

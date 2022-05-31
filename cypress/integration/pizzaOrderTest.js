@@ -132,15 +132,69 @@ describe("Pizza Form Tests", () => {
         })
 
         describe("can submit form and error check", () => {
-            it("can submit form", () => {
+            it("keeps order button disabled until name and size entered", () => {
+                checkOut().should("be.disabled")
+
+                nameInput().type("Turtle");
+                dropDown().select("small");
+                checkOut().should("not.be.disabled");
+            })
+
+            it("shows errors when it doesn't have correct inputs", () => {
+                nameInput().type("w");
+                cy.contains("name must be at least 2 characters");
+
+                dropDown().select("small");
+                dropDown().select("Pick your size");
+                cy.contains("Must choose a size");
+
+                checkOut().should("be.disabled");
+            })
+
+            it("can submit form and shows new page", () => {
                 nameInput().type("Loki");
                 dropDown().select("medium");
                 topVeggie().click();
+                inputGF().click()
 
                 inputSpecial().type("if you see a Thor look alike outside the door, go around the block until they're gone. I'm not home.");
                 checkOut().click()
+
+                cy.url().should("include", "orders")
+
+                cy.contains("Loki");
+                cy.contains("medium");
+                cy.contains(/veggie/i);
+                cy.contains("Gluten Free");
+                cy.contains("if you see a Thor look alike outside the door, go around the block until they're gone. I'm not home.");
             })
-        })
+
+            it("shows all options from input", () => {
+                nameInput().type("Alexander Hamilton");
+                dropDown().select("medium");
+                topPineapple().click();
+                inputGF().click();
+                inputSpecial().type("The last place I ordered from didn't respond to my 51 emails. I hope you don't disappoint.")
+
+                checkOut().click();
+
+                cy.contains("Alexander Hamilton")
+                cy.contains("medium");
+                cy.contains(/pineapple/i);
+                cy.contains("Gluten Free");
+                cy.contains("The last place I ordered from didn't respond to my 51 emails. I hope you don't disappoint.");
+            })
+
+            it("shows cheese if no toppings chosen", () => {
+                nameInput().type("George Washington");
+                dropDown().select("small");
+                checkOut().click();
+
+                cy.contains("Cheese");
+                cy.contains("Toppings").should("not.exist");
+            })
+
+        })// submit and new page
 
     })// form check
 })

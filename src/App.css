@@ -36,10 +36,6 @@ body {
   text-align: center;
 }
 
-#homepage {
-  height: 100vh;
-}
-
 #homepage-div {
   overflow: hidden;
   height: 50vh;
@@ -93,6 +89,7 @@ h5 {
   color: #ffffff;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .orderCard {
@@ -112,4 +109,5 @@ h5 {
   border: 2px dashed #ffffff;
   width: 30%;
   margin: 0 auto;
+  padding: 1rem;
 }
