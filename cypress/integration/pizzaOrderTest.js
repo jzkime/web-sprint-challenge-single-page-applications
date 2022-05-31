@@ -82,9 +82,7 @@ describe("Pizza Form Tests", () => {
 
             inputSpecial().should("have.value", "")
             .type("Please knock twice when when delivering...")
-            .should("have.value", "Please knock twice when when delivering...")
-
-
+            .should("have.value", "Please knock twice when when delivering...");
         })
 
         describe("checks each topping", () => {
@@ -105,22 +103,22 @@ describe("Pizza Form Tests", () => {
         describe("checks each drop down option", () => {
             it("checks small", () => {
                 dropDown().should("have.value", "Pick your pizza size").select("small");
-                dropDown().should("have.value", "small").select("medium");
+                dropDown().should("have.value", "small");
             })
 
             it("checks medium", () => {
                 dropDown().select("medium");
-                dropDown().should("have.value", "medium").select("large");
+                dropDown().should("have.value", "medium");
             })
 
             it("checks large", () => {
                 dropDown().select("large");
-                dropDown().should("have.value", "large").select("super");
+                dropDown().should("have.value", "large");
             })
 
             it("checks super", () => {
                 dropDown().select("super");
-                dropDown().should("have.value", "super").select("small");
+                dropDown().should("have.value", "super");
             })
 
             it("checks error of dropdown", () => {
