@@ -7,7 +7,7 @@ export default function HomePage(props) {
             <div id='homepage-div'>
                 <img src='https://images.pexels.com/photos/1566837/pexels-photo-1566837.jpeg'/>
             </div>
-            <Link to='/pizza' id='order-pizza'>Order!</Link>
+            <Link to='/pizza' id='order-pizza' >Order!</Link>
         </section>
     )
 }

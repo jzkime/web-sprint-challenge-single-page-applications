@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import './App.css'
-import { Link, Route } from 'react-router-dom'
+import { Link, Route, useHistory } from 'react-router-dom'
 import Form from './Form'
 import HomePage from './HomePage'
+import OrderSent from "./OrderSent";
+import axios from 'axios'
 import * as yup from 'yup'
 import schema from './formSchema'
 
@@ -28,6 +30,8 @@ const App = () => {
   const [ errors, setErrors ] = useState(initialErrors);
   const [ disabled, setDisabled ] = useState(false)
 
+  const history = useHistory();
+
   const validatation = (name, value) => {
     yup.reach(schema, name).validate(value)
     .then(() => setErrors({...errors, [name]: ""}))
@@ -43,16 +47,20 @@ const App = () => {
     const newOrder = {
       name: orderValues.name,
       size: orderValues.size,
-      topping1: orderValues.pepperoni,
-      topping2: orderValues.veggie,
-      topping3: orderValues.meat,
-      topping4: orderValues.pineapple,
+      pepperoni: orderValues.pepperoni,
+      veggie: orderValues.veggie,
+      meat: orderValues.meat,
+      pineapple: orderValues.pineapple,
+      cheese: (!orderValues.pepperoni && !orderValues.veggie && !orderValues.meat && !orderValues.pineapple) ? true : false,
       special: orderValues.special,
       gf: orderValues.gf,
     }
 
-    setOrders(...orders, newOrder )
-    console.log(newOrder)
+    axios.post('https://reqres.in/api/orders', newOrder).then(res => {
+      setOrders([...orders, res.data])
+    }).catch(err => console.error(err))
+
+    history.push('/orders')
     setOrderValues(initialValues)
   }
 
@@ -65,14 +73,15 @@ useEffect(() => {
     <>
     <section id='header'>
       <h1>Lambda Eats</h1>
-      <Link to='/'>Home</Link>
-      <Link to='/pizza' id='order-pizza'>Order Online!</Link>
+      <Link to='/' name='headerHome'>Home</Link>
+      <Link to='/pizza' id='header-pizza'>Order Online!</Link>
      </section>
 
 
-    <Route exact path='/'>
-      <HomePage />
-    </Route>
+      <Route exact path='/'>
+        <HomePage />
+      </Route>
+
       <Route path='/pizza'>
         <Form 
         values={orderValues} 
@@ -81,6 +90,10 @@ useEffect(() => {
         errors={errors} 
         disabled={disabled}
         />
+      </Route>
+
+      <Route path='/orders'>
+        <OrderSent order={orders}/>
       </Route>
     </>
   );

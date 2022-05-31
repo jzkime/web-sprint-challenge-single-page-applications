@@ -22,7 +22,7 @@ export default function Form(props) {
                 <h5>{errors.name}</h5>
 
             <select id='size-dropdown' name='size' onChange={changeHandler} value={values.size} >
-                <option>Pick your size</option>
+                <option name='pick-size'>Pick your size</option>
                 <option name='small'>small</option>
                 <option name='medium'>medium</option>
                 <option name='large'>large</option>
