@@ -3,7 +3,6 @@
   padding: 0;
   max-width: 100%;
   box-sizing: border-box;
-  /* border: 1px solid red; */
 }
 
 html {
@@ -90,10 +89,17 @@ h5 {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-content: flex-start;
+  gap: 2%;
+}
+
+#confirmation-page h2 {
+  width: 100%;
+  align-self: flex-start;
 }
 
 .orderCard {
-  width: 50%;
+  width: 45%;
   display: flex;
   flex-direction: column;
   gap: 10px;
