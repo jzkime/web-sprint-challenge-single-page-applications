@@ -6,8 +6,8 @@ export default function OrderSent(props) {
 
     return(
         <section id='confirmation-page'>
-            {order.length === 0 ? 
-            <h2>Please send your order request through the order online button!</h2>
+            { !order.length ? 
+            <h2>Loading...</h2>
             :
             order.map(order => <OrderCard order={order} key={order.id} />)}
         </section>
