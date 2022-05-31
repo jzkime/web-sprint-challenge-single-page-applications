@@ -75,7 +75,7 @@ describe("Pizza Form Tests", () => {
             .type("Peter Parker")
             .should("have.value", "Peter Parker");
 
-            dropDown().should("have.value", "Pick your size").select("small");
+            dropDown().should("have.value", "Pick your pizza size").select("small");
 
             inputGF().should("not.be.checked");
             inputGF().click().should("be.checked");
@@ -104,28 +104,28 @@ describe("Pizza Form Tests", () => {
 
         describe("checks each drop down option", () => {
             it("checks small", () => {
-                dropDown().should("have.value", "Pick your size").select("small");
+                dropDown().should("have.value", "Pick your pizza size").select("small");
                 dropDown().should("have.value", "small").select("medium");
             })
 
             it("checks medium", () => {
-                dropDown().should("have.value", "Pick your size").select("medium");
+                dropDown().select("medium");
                 dropDown().should("have.value", "medium").select("large");
             })
 
             it("checks large", () => {
-                dropDown().should("have.value", "Pick your size").select("large");
+                dropDown().select("large");
                 dropDown().should("have.value", "large").select("super");
             })
 
             it("checks super", () => {
-                dropDown().should("have.value", "Pick your size").select("super");
+                dropDown().select("super");
                 dropDown().should("have.value", "super").select("small");
             })
 
             it("checks error of dropdown", () => {
-                dropDown().should("have.value", "Pick your size").select("large");
-                dropDown().should("have.value", "large").select("Pick your size");
+                dropDown().select("large");
+                dropDown().should("have.value", "large").select("Pick your pizza size");
 
                 cy.contains("Must choose a size");
             })
@@ -145,7 +145,7 @@ describe("Pizza Form Tests", () => {
                 cy.contains("name must be at least 2 characters");
 
                 dropDown().select("small");
-                dropDown().select("Pick your size");
+                dropDown().select("Pick your pizza size");
                 cy.contains("Must choose a size");
 
                 checkOut().should("be.disabled");

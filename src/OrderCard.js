@@ -5,7 +5,7 @@ export default function OrderCard(props) {
     return (
         <div className='orderCard'>
             <h3>{order.name}</h3>
-            <p>Size: <strong>{order.size}</strong></p>
+            <p>Pizza size: <strong>{order.size}</strong></p>
             <div className='toppings'>
                 { !order.cheese && <h4>Toppings:</h4> }
                 { order.cheese && <p>Cheese</p> }

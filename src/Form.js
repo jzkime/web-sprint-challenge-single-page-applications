@@ -19,16 +19,16 @@ export default function Form(props) {
             <label>Your name&nbsp;
                 <input type='text' id='name-input' name='name' onChange={changeHandler} value={values.name} placeholder='Pepper Pots' />
             </label>
-                <h5>{errors.name}</h5>
+                { errors.name && <h5>{errors.name}</h5> }
 
             <select id='size-dropdown' name='size' onChange={changeHandler} value={values.size} >
-                <option name='pick-size'>Pick your size</option>
+                <option name='pick-size'>Pick your pizza size</option>
                 <option name='small'>small</option>
                 <option name='medium'>medium</option>
                 <option name='large'>large</option>
                 <option name='super'>super</option>
             </select> 
-            <h5>{errors.size}</h5>
+            {errors.size && <h5> {errors.size} </h5>}
 
 
         <label>Toppings
